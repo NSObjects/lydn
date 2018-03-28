@@ -1,0 +1,25 @@
+
+<body>
+  {{ partial "header" . }}
+  {{ partial "nav" . }}
+  <section class="section">
+    <div class="container">
+      <h2 class="subtitle is-6">{{ .Date.Format "January 2, 2006" }}</h2>
+      <h1 class="title">{{ .Title }}</h1>
+      {{ if .Params.tags }}
+      {{ partial "tags" .Params.tags }}
+      {{ end }}
+
+      {{- if or .Params.toc (and (gt .WordCount 400 ) (ne .Params.toc "false")) }}
+    <aside class="toc">
+        {{ .TableOfContents }}
+    </aside>
+      {{- end }}
+      <div class="content">
+        {{ .Content }}
+      </div>
+    </div>
+  </section>
+  {{ partial "disqus" . }}
+  {{ partial "footer" . }}
+</body>
